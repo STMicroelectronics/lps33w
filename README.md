@@ -5,7 +5,7 @@ Sensor driver for LPS33W sensor written in C programming language. This reposito
 In order to `clone` the complete content of the repository folder, use the command:
 
 ```
-git clone https://github.com/STMicroelectronics/LPS33W/
+git clone https://github.com/STMicroelectronics/LPS33W-PID/
 ```
 
 Some examples of driver usage can be found [here](https://github.com/STMicroelectronics/STMems_Standard_C_drivers).
