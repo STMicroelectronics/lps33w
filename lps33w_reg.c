@@ -45,10 +45,12 @@
   * @retval       interface status (MANDATORY: return 0 -> no Error)
   *
   */
-int32_t __weak lps33w_read_reg(stmdev_ctx_t *ctx, uint8_t reg, uint8_t *data,
+int32_t __weak lps33w_read_reg(const stmdev_ctx_t *ctx, uint8_t reg, uint8_t *data,
                                uint16_t len)
 {
   int32_t ret;
+
+  if (ctx == NULL) return -1;
 
   ret = ctx->read_reg(ctx->handle, reg, data, len);
 
@@ -65,11 +67,13 @@ int32_t __weak lps33w_read_reg(stmdev_ctx_t *ctx, uint8_t reg, uint8_t *data,
   * @retval       interface status (MANDATORY: return 0 -> no Error)
   *
   */
-int32_t __weak lps33w_write_reg(stmdev_ctx_t *ctx, uint8_t reg,
+int32_t __weak lps33w_write_reg(const stmdev_ctx_t *ctx, uint8_t reg,
                                 uint8_t *data,
                                 uint16_t len)
 {
   int32_t ret;
+
+  if (ctx == NULL) return -1;
 
   ret = ctx->write_reg(ctx->handle, reg, data, len);
 
@@ -120,7 +124,7 @@ float_t lps33w_from_lsb_to_degc(int16_t lsb)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_autozero_rst_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_autozero_rst_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
   int32_t ret;
@@ -146,7 +150,7 @@ int32_t lps33w_autozero_rst_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_autozero_rst_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_autozero_rst_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
   int32_t ret;
@@ -166,7 +170,7 @@ int32_t lps33w_autozero_rst_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_autozero_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_autozero_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
   int32_t ret;
@@ -192,7 +196,7 @@ int32_t lps33w_autozero_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_autozero_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_autozero_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
   int32_t ret;
@@ -212,7 +216,7 @@ int32_t lps33w_autozero_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_pressure_snap_rst_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_pressure_snap_rst_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
   int32_t ret;
@@ -238,7 +242,7 @@ int32_t lps33w_pressure_snap_rst_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_pressure_snap_rst_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_pressure_snap_rst_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
   int32_t ret;
@@ -258,7 +262,7 @@ int32_t lps33w_pressure_snap_rst_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_pressure_snap_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_pressure_snap_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
   int32_t ret;
@@ -284,7 +288,7 @@ int32_t lps33w_pressure_snap_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_pressure_snap_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_pressure_snap_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
   int32_t ret;
@@ -304,7 +308,7 @@ int32_t lps33w_pressure_snap_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_block_data_update_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_block_data_update_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_ctrl_reg1_t ctrl_reg1;
   int32_t ret;
@@ -328,7 +332,7 @@ int32_t lps33w_block_data_update_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_block_data_update_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_block_data_update_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_ctrl_reg1_t ctrl_reg1;
   int32_t ret;
@@ -347,7 +351,7 @@ int32_t lps33w_block_data_update_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_low_pass_filter_mode_set(stmdev_ctx_t *ctx,
+int32_t lps33w_low_pass_filter_mode_set(const stmdev_ctx_t *ctx,
                                         lps33w_lpfp_t val)
 {
   lps33w_ctrl_reg1_t ctrl_reg1;
@@ -372,7 +376,7 @@ int32_t lps33w_low_pass_filter_mode_set(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_low_pass_filter_mode_get(stmdev_ctx_t *ctx,
+int32_t lps33w_low_pass_filter_mode_get(const stmdev_ctx_t *ctx,
                                         lps33w_lpfp_t *val)
 {
   lps33w_ctrl_reg1_t ctrl_reg1;
@@ -410,7 +414,7 @@ int32_t lps33w_low_pass_filter_mode_get(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_data_rate_set(stmdev_ctx_t *ctx, lps33w_odr_t val)
+int32_t lps33w_data_rate_set(const stmdev_ctx_t *ctx, lps33w_odr_t val)
 {
   lps33w_ctrl_reg1_t ctrl_reg1;
   int32_t ret;
@@ -434,7 +438,7 @@ int32_t lps33w_data_rate_set(stmdev_ctx_t *ctx, lps33w_odr_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_data_rate_get(stmdev_ctx_t *ctx, lps33w_odr_t *val)
+int32_t lps33w_data_rate_get(const stmdev_ctx_t *ctx, lps33w_odr_t *val)
 {
   lps33w_ctrl_reg1_t ctrl_reg1;
   int32_t ret;
@@ -483,7 +487,7 @@ int32_t lps33w_data_rate_get(stmdev_ctx_t *ctx, lps33w_odr_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_one_shoot_trigger_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_one_shoot_trigger_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
   int32_t ret;
@@ -507,7 +511,7 @@ int32_t lps33w_one_shoot_trigger_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_one_shoot_trigger_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_one_shoot_trigger_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
   int32_t ret;
@@ -528,7 +532,7 @@ int32_t lps33w_one_shoot_trigger_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_pressure_ref_set(stmdev_ctx_t *ctx, int32_t val)
+int32_t lps33w_pressure_ref_set(const stmdev_ctx_t *ctx, int32_t val)
 {
   uint8_t buff[3];
   int32_t ret;
@@ -552,7 +556,7 @@ int32_t lps33w_pressure_ref_set(stmdev_ctx_t *ctx, int32_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_pressure_ref_get(stmdev_ctx_t *ctx, int32_t *val)
+int32_t lps33w_pressure_ref_get(const stmdev_ctx_t *ctx, int32_t *val)
 {
   uint8_t buff[3];
   int32_t ret;
@@ -574,7 +578,7 @@ int32_t lps33w_pressure_ref_get(stmdev_ctx_t *ctx, int32_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_pressure_offset_set(stmdev_ctx_t *ctx, int16_t val)
+int32_t lps33w_pressure_offset_set(const stmdev_ctx_t *ctx, int16_t val)
 {
   uint8_t buff[2];
   int32_t ret;
@@ -595,7 +599,7 @@ int32_t lps33w_pressure_offset_set(stmdev_ctx_t *ctx, int16_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_pressure_offset_get(stmdev_ctx_t *ctx, int16_t *val)
+int32_t lps33w_pressure_offset_get(const stmdev_ctx_t *ctx, int16_t *val)
 {
   uint8_t buff[2];
   int32_t ret;
@@ -615,7 +619,7 @@ int32_t lps33w_pressure_offset_get(stmdev_ctx_t *ctx, int16_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_press_data_ready_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_press_data_ready_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_status_t status;
   int32_t ret;
@@ -634,7 +638,7 @@ int32_t lps33w_press_data_ready_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_temp_data_ready_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_temp_data_ready_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_status_t status;
   int32_t ret;
@@ -653,7 +657,7 @@ int32_t lps33w_temp_data_ready_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_press_data_ovr_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_press_data_ovr_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_status_t status;
   int32_t ret;
@@ -672,7 +676,7 @@ int32_t lps33w_press_data_ovr_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_temp_data_ovr_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_temp_data_ovr_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_status_t status;
   int32_t ret;
@@ -691,7 +695,7 @@ int32_t lps33w_temp_data_ovr_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_pressure_raw_get(stmdev_ctx_t *ctx, uint32_t *buff)
+int32_t lps33w_pressure_raw_get(const stmdev_ctx_t *ctx, uint32_t *buff)
 {
   uint8_t reg[3];
   int32_t ret;
@@ -713,7 +717,7 @@ int32_t lps33w_pressure_raw_get(stmdev_ctx_t *ctx, uint32_t *buff)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_temperature_raw_get(stmdev_ctx_t *ctx, int16_t *buff)
+int32_t lps33w_temperature_raw_get(const stmdev_ctx_t *ctx, int16_t *buff)
 {
   uint8_t reg[2];
   int32_t ret;
@@ -736,7 +740,7 @@ int32_t lps33w_temperature_raw_get(stmdev_ctx_t *ctx, int16_t *buff)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_low_pass_rst_get(stmdev_ctx_t *ctx, uint8_t *buff)
+int32_t lps33w_low_pass_rst_get(const stmdev_ctx_t *ctx, uint8_t *buff)
 {
   int32_t ret;
 
@@ -765,7 +769,7 @@ int32_t lps33w_low_pass_rst_get(stmdev_ctx_t *ctx, uint8_t *buff)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_device_id_get(stmdev_ctx_t *ctx, uint8_t *buff)
+int32_t lps33w_device_id_get(const stmdev_ctx_t *ctx, uint8_t *buff)
 {
   int32_t ret;
 
@@ -782,7 +786,7 @@ int32_t lps33w_device_id_get(stmdev_ctx_t *ctx, uint8_t *buff)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_reset_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_reset_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
   int32_t ret;
@@ -806,7 +810,7 @@ int32_t lps33w_reset_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_reset_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_reset_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
   int32_t ret;
@@ -825,7 +829,7 @@ int32_t lps33w_reset_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_boot_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_boot_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
   int32_t ret;
@@ -849,7 +853,7 @@ int32_t lps33w_boot_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_boot_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_boot_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
   int32_t ret;
@@ -868,7 +872,7 @@ int32_t lps33w_boot_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_low_power_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_low_power_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_res_conf_t res_conf;
   int32_t ret;
@@ -892,7 +896,7 @@ int32_t lps33w_low_power_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_low_power_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_low_power_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_res_conf_t res_conf;
   int32_t ret;
@@ -911,7 +915,7 @@ int32_t lps33w_low_power_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_boot_status_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_boot_status_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_int_source_t int_source;
   int32_t ret;
@@ -930,7 +934,7 @@ int32_t lps33w_boot_status_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_dev_status_get(stmdev_ctx_t *ctx,
+int32_t lps33w_dev_status_get(const stmdev_ctx_t *ctx,
                               lps33w_dev_stat_t *val)
 {
   int32_t ret;
@@ -960,7 +964,7 @@ int32_t lps33w_dev_status_get(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_sign_of_int_threshold_set(stmdev_ctx_t *ctx,
+int32_t lps33w_sign_of_int_threshold_set(const stmdev_ctx_t *ctx,
                                          lps33w_pe_t val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
@@ -987,7 +991,7 @@ int32_t lps33w_sign_of_int_threshold_set(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_sign_of_int_threshold_get(stmdev_ctx_t *ctx,
+int32_t lps33w_sign_of_int_threshold_get(const stmdev_ctx_t *ctx,
                                          lps33w_pe_t *val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
@@ -1031,7 +1035,7 @@ int32_t lps33w_sign_of_int_threshold_get(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_int_notification_mode_set(stmdev_ctx_t *ctx,
+int32_t lps33w_int_notification_mode_set(const stmdev_ctx_t *ctx,
                                          lps33w_lir_t val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
@@ -1059,7 +1063,7 @@ int32_t lps33w_int_notification_mode_set(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_int_notification_mode_get(stmdev_ctx_t *ctx,
+int32_t lps33w_int_notification_mode_get(const stmdev_ctx_t *ctx,
                                          lps33w_lir_t *val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
@@ -1094,7 +1098,7 @@ int32_t lps33w_int_notification_mode_get(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_int_generation_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_int_generation_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
   int32_t ret;
@@ -1120,7 +1124,7 @@ int32_t lps33w_int_generation_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_int_generation_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_int_generation_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_interrupt_cfg_t interrupt_cfg;
   int32_t ret;
@@ -1140,7 +1144,7 @@ int32_t lps33w_int_generation_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_int_threshold_set(stmdev_ctx_t *ctx, uint16_t val)
+int32_t lps33w_int_threshold_set(const stmdev_ctx_t *ctx, uint16_t val)
 {
   uint8_t buff[2];
   int32_t ret;
@@ -1160,7 +1164,7 @@ int32_t lps33w_int_threshold_set(stmdev_ctx_t *ctx, uint16_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_int_threshold_get(stmdev_ctx_t *ctx, uint16_t *val)
+int32_t lps33w_int_threshold_get(const stmdev_ctx_t *ctx, uint16_t *val)
 {
   uint8_t buff[2];
   int32_t ret;
@@ -1180,7 +1184,7 @@ int32_t lps33w_int_threshold_get(stmdev_ctx_t *ctx, uint16_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_int_pin_mode_set(stmdev_ctx_t *ctx, lps33w_int_s_t val)
+int32_t lps33w_int_pin_mode_set(const stmdev_ctx_t *ctx, lps33w_int_s_t val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
   int32_t ret;
@@ -1204,7 +1208,7 @@ int32_t lps33w_int_pin_mode_set(stmdev_ctx_t *ctx, lps33w_int_s_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_int_pin_mode_get(stmdev_ctx_t *ctx,
+int32_t lps33w_int_pin_mode_get(const stmdev_ctx_t *ctx,
                                 lps33w_int_s_t *val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
@@ -1246,7 +1250,7 @@ int32_t lps33w_int_pin_mode_get(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_drdy_on_int_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_drdy_on_int_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
   int32_t ret;
@@ -1270,7 +1274,7 @@ int32_t lps33w_drdy_on_int_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_drdy_on_int_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_drdy_on_int_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
   int32_t ret;
@@ -1289,7 +1293,7 @@ int32_t lps33w_drdy_on_int_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_ovr_on_int_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_fifo_ovr_on_int_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
   int32_t ret;
@@ -1313,7 +1317,7 @@ int32_t lps33w_fifo_ovr_on_int_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_ovr_on_int_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_fifo_ovr_on_int_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
   int32_t ret;
@@ -1332,7 +1336,7 @@ int32_t lps33w_fifo_ovr_on_int_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_threshold_on_int_set(stmdev_ctx_t *ctx,
+int32_t lps33w_fifo_threshold_on_int_set(const stmdev_ctx_t *ctx,
                                          uint8_t val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
@@ -1357,7 +1361,7 @@ int32_t lps33w_fifo_threshold_on_int_set(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_threshold_on_int_get(stmdev_ctx_t *ctx,
+int32_t lps33w_fifo_threshold_on_int_get(const stmdev_ctx_t *ctx,
                                          uint8_t *val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
@@ -1377,7 +1381,7 @@ int32_t lps33w_fifo_threshold_on_int_get(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_full_on_int_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_fifo_full_on_int_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
   int32_t ret;
@@ -1401,7 +1405,7 @@ int32_t lps33w_fifo_full_on_int_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_full_on_int_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_fifo_full_on_int_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
   int32_t ret;
@@ -1420,7 +1424,7 @@ int32_t lps33w_fifo_full_on_int_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_pin_mode_set(stmdev_ctx_t *ctx, lps33w_pp_od_t val)
+int32_t lps33w_pin_mode_set(const stmdev_ctx_t *ctx, lps33w_pp_od_t val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
   int32_t ret;
@@ -1444,7 +1448,7 @@ int32_t lps33w_pin_mode_set(stmdev_ctx_t *ctx, lps33w_pp_od_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_pin_mode_get(stmdev_ctx_t *ctx, lps33w_pp_od_t *val)
+int32_t lps33w_pin_mode_get(const stmdev_ctx_t *ctx, lps33w_pp_od_t *val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
   int32_t ret;
@@ -1477,7 +1481,7 @@ int32_t lps33w_pin_mode_get(stmdev_ctx_t *ctx, lps33w_pp_od_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_int_polarity_set(stmdev_ctx_t *ctx,
+int32_t lps33w_int_polarity_set(const stmdev_ctx_t *ctx,
                                 lps33w_int_h_l_t val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
@@ -1502,7 +1506,7 @@ int32_t lps33w_int_polarity_set(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_int_polarity_get(stmdev_ctx_t *ctx,
+int32_t lps33w_int_polarity_get(const stmdev_ctx_t *ctx,
                                 lps33w_int_h_l_t *val)
 {
   lps33w_ctrl_reg3_t ctrl_reg3;
@@ -1536,7 +1540,7 @@ int32_t lps33w_int_polarity_get(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_int_source_get(stmdev_ctx_t *ctx,
+int32_t lps33w_int_source_get(const stmdev_ctx_t *ctx,
                               lps33w_int_source_t *val)
 {
   int32_t ret;
@@ -1554,7 +1558,7 @@ int32_t lps33w_int_source_get(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_int_on_press_high_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_int_on_press_high_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_int_source_t int_source;
   int32_t ret;
@@ -1573,7 +1577,7 @@ int32_t lps33w_int_on_press_high_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_int_on_press_low_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_int_on_press_low_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_int_source_t int_source;
   int32_t ret;
@@ -1592,7 +1596,7 @@ int32_t lps33w_int_on_press_low_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_interrupt_event_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_interrupt_event_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_int_source_t int_source;
   int32_t ret;
@@ -1624,7 +1628,7 @@ int32_t lps33w_interrupt_event_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_stop_on_fifo_threshold_set(stmdev_ctx_t *ctx,
+int32_t lps33w_stop_on_fifo_threshold_set(const stmdev_ctx_t *ctx,
                                           uint8_t val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
@@ -1649,7 +1653,7 @@ int32_t lps33w_stop_on_fifo_threshold_set(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_stop_on_fifo_threshold_get(stmdev_ctx_t *ctx,
+int32_t lps33w_stop_on_fifo_threshold_get(const stmdev_ctx_t *ctx,
                                           uint8_t *val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
@@ -1669,7 +1673,7 @@ int32_t lps33w_stop_on_fifo_threshold_get(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_fifo_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
   int32_t ret;
@@ -1693,7 +1697,7 @@ int32_t lps33w_fifo_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_fifo_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
   int32_t ret;
@@ -1712,7 +1716,7 @@ int32_t lps33w_fifo_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_watermark_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_fifo_watermark_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_fifo_ctrl_t fifo_ctrl;
   int32_t ret;
@@ -1736,7 +1740,7 @@ int32_t lps33w_fifo_watermark_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_watermark_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_fifo_watermark_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_fifo_ctrl_t fifo_ctrl;
   int32_t ret;
@@ -1755,7 +1759,7 @@ int32_t lps33w_fifo_watermark_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_mode_set(stmdev_ctx_t *ctx, lps33w_f_mode_t val)
+int32_t lps33w_fifo_mode_set(const stmdev_ctx_t *ctx, lps33w_f_mode_t val)
 {
   lps33w_fifo_ctrl_t fifo_ctrl;
   int32_t ret;
@@ -1779,7 +1783,7 @@ int32_t lps33w_fifo_mode_set(stmdev_ctx_t *ctx, lps33w_f_mode_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_mode_get(stmdev_ctx_t *ctx, lps33w_f_mode_t *val)
+int32_t lps33w_fifo_mode_get(const stmdev_ctx_t *ctx, lps33w_f_mode_t *val)
 {
   lps33w_fifo_ctrl_t fifo_ctrl;
   int32_t ret;
@@ -1832,7 +1836,7 @@ int32_t lps33w_fifo_mode_get(stmdev_ctx_t *ctx, lps33w_f_mode_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_data_level_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_fifo_data_level_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_fifo_status_t fifo_status;
   int32_t ret;
@@ -1852,7 +1856,7 @@ int32_t lps33w_fifo_data_level_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_ovr_flag_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_fifo_ovr_flag_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_fifo_status_t fifo_status;
   int32_t ret;
@@ -1872,7 +1876,7 @@ int32_t lps33w_fifo_ovr_flag_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_fifo_fth_flag_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_fifo_fth_flag_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_fifo_status_t fifo_status;
   int32_t ret;
@@ -1905,7 +1909,7 @@ int32_t lps33w_fifo_fth_flag_get(stmdev_ctx_t *ctx, uint8_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_spi_mode_set(stmdev_ctx_t *ctx, lps33w_sim_t val)
+int32_t lps33w_spi_mode_set(const stmdev_ctx_t *ctx, lps33w_sim_t val)
 {
   lps33w_ctrl_reg1_t ctrl_reg1;
   int32_t ret;
@@ -1929,7 +1933,7 @@ int32_t lps33w_spi_mode_set(stmdev_ctx_t *ctx, lps33w_sim_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_spi_mode_get(stmdev_ctx_t *ctx, lps33w_sim_t *val)
+int32_t lps33w_spi_mode_get(const stmdev_ctx_t *ctx, lps33w_sim_t *val)
 {
   lps33w_ctrl_reg1_t ctrl_reg1;
   int32_t ret;
@@ -1962,7 +1966,7 @@ int32_t lps33w_spi_mode_get(stmdev_ctx_t *ctx, lps33w_sim_t *val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_i2c_interface_set(stmdev_ctx_t *ctx,
+int32_t lps33w_i2c_interface_set(const stmdev_ctx_t *ctx,
                                  lps33w_i2c_dis_t val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
@@ -1987,7 +1991,7 @@ int32_t lps33w_i2c_interface_set(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_i2c_interface_get(stmdev_ctx_t *ctx,
+int32_t lps33w_i2c_interface_get(const stmdev_ctx_t *ctx,
                                  lps33w_i2c_dis_t *val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
@@ -2022,7 +2026,7 @@ int32_t lps33w_i2c_interface_get(stmdev_ctx_t *ctx,
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_auto_add_inc_set(stmdev_ctx_t *ctx, uint8_t val)
+int32_t lps33w_auto_add_inc_set(const stmdev_ctx_t *ctx, uint8_t val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
   int32_t ret;
@@ -2047,7 +2051,7 @@ int32_t lps33w_auto_add_inc_set(stmdev_ctx_t *ctx, uint8_t val)
   * @retval        Interface status (MANDATORY: return 0 -> no Error).
   *
   */
-int32_t lps33w_auto_add_inc_get(stmdev_ctx_t *ctx, uint8_t *val)
+int32_t lps33w_auto_add_inc_get(const stmdev_ctx_t *ctx, uint8_t *val)
 {
   lps33w_ctrl_reg2_t ctrl_reg2;
   int32_t ret;
